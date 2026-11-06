@@ -1,5 +1,5 @@
 def count_numbers(a:int, b:int):
-    # TODO find how may z in [a,b] that z = (2 or 5) *10 (2 or 5)
+    # TODO find how may z in [a,b] that z = (2 or 5) *10 + (2 or 5)
     # did he meant [a,b) or [a,b]?
     # idea 1 use str and bool var for pass
     # idea 2 num of possibilities
@@ -61,6 +61,23 @@ def upto(n:int):
             return count
 
     return count
+
+"""model solution
+def count_numbers(a, b):
+    numbers = [2, 5]
+    count = 0
+
+    for number in numbers:
+        if a <= number <= b:
+            count += 1
+
+        if number > b: break
+
+        numbers.append(number * 10 + 2)
+        numbers.append(number * 10 + 5)
+
+    return count
+"""
 
 if __name__ == "__main__":
     print(count_numbers(1, 100)) # 6

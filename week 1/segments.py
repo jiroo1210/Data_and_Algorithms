@@ -1,8 +1,5 @@
 def find_segments(data:str):
     # TODO list of tuples, (#, 'char')
-    
-
-    
     # exceptions for len(data) = 0 or 1
     if not data:
         return []
@@ -22,14 +19,21 @@ def find_segments(data:str):
             i += 1
         else:
             final_list.append((count,char))
-            char = data[i]
-            count = 1
+            count = 0
             i += 1
     final_list.append((count,char))
 
     return final_list
 
-        
+"""model solution:
+
+import re
+
+def find_segments(data):
+    matches = re.findall(r"(([a-z])\2*)", data)
+    result = [(len(match[0]), match[1]) for match in matches]
+    return result
+"""        
 
 
 if __name__ == "__main__":

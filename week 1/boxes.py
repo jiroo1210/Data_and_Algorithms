@@ -2,6 +2,12 @@ def min_count(product_count, box_size):
     # returns the minimum number of boxes needed to pack product_count items
     return (product_count//box_size + (1 if product_count % box_size != 0 else 0))
 
+# model solution:
+# import math
+
+# def min_count(product_count, box_size):
+#    return math.ceil(product_count / box_size)
+
 
 if __name__ == "__main__":
     print(min_count(10, 3)) # 4

@@ -1,9 +1,10 @@
 def check_number(number:int):
+    # TODO
     # numbers is 9 in length
     # multiplied by the values 3,7,1,3,7,1,3,7 (l-2-r )
     # If sum(mul*val) % 10 == 0 & numbers[-1] ==0: True. 
     # Otherwise, the check digit is the distance of the sum to the next multiple of 10
-    # TODO
+    
     num_str = str(number)
     if len(num_str)!=9:
         return False
@@ -23,7 +24,22 @@ def check_number(number:int):
         return check_num == 0
     else:
         return (10 - new_sum % 10) == check_num
+""" model solution:
+import re
 
+def check_number(number):
+    if not re.match("^0[0-9]{8}$", number):
+        return False
+
+    weight = [3, 7, 1, 3, 7, 1, 3, 7]
+    result = 0
+    for pos in range(8):
+        result += weight[pos] * int(number[pos])
+
+    last = (10 - result % 10) % 10
+    return int(number[-1]) == last
+
+"""
 
 if __name__ == "__main__":
     print(check_number("012749138")) # False
