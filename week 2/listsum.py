@@ -5,13 +5,31 @@ def find_sums(numbers:list, size:int):
     
     first = sum(numbers[:size])
     sum_list = [first]
-
+    # first sublist
     for i in range(len(numbers)-size):
         sum_list.append(sum_list[-1] - numbers[i] + numbers[i + size])
-    
+        # from last element of sum_list, 
+        # subtract the first element of the previous sublist 
+        # and add the last element of the current sublist
     return sum_list
         
+"""model solution
+def find_sums(numbers, size):
+    # does not take account of possible errors
+    
+    result = []
 
+    current_sum = sum(numbers[:size])
+    result.append(current_sum)
+
+    for pos in range(size, len(numbers)):
+        current_sum += numbers[pos]
+        current_sum -= numbers[pos - size]
+        result.append(current_sum)
+        # not one liner
+    return result
+
+"""
     
 
 

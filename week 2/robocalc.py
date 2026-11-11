@@ -23,14 +23,14 @@ def calculate(input:str, rules:list):
     # Is symbol being written on top of current one? 
     # if above, cmd needs to be list
     
-
+    # st starts at 1, pos starts at 0, cmd starts with L and ends with R
     while -1 < pos < len(cmd):
         ch = cmd[pos] # shallow copy for abbrev
         if ch not in accepted_str:
             return False
         if st not in accepted_ran:
             return False
-        if (ch,st ) not in rules_dict:
+        if (ch, st) not in rules_dict:
             return False
         if attempts > 1000:
             return False
@@ -55,6 +55,38 @@ def calculate(input:str, rules:list):
     # no return gives None for certain input
     # when pos < -1 or pos > len(cmd)
     return False
+    """ model solution
+    def calculate(input, rules):
+    symbols = ["L"] + list(input) + ["R"]
+
+    pos = 0
+    state = 1
+    counter = 0
+
+    while True:
+        found = False
+
+        for old_symbol, old_state, new_symbol, new_state, action in rules:
+            if symbols[pos] == old_symbol and state == old_state:
+                found = True
+                counter += 1
+
+                symbols[pos] = new_symbol
+                state = new_state
+
+                if action == "RIGHT": pos += 1
+                if action == "LEFT": pos -= 1
+                if action == "ACCEPT": return True
+                if action == "REJECT": return False
+
+                if pos < 0 or pos >= len(symbols):
+                    return False
+
+                break
+
+        if not found or counter == 1000:
+            return False
+    """
 
    
 

@@ -25,8 +25,44 @@ def find_order(n):
 
     return lost
 
+    """model solution #1
+    def find_order(n):
+    players = list(range(1, n+1))
 
-    
+    removed = []
+    remove_next = False
+
+    while len(players) >= 1:
+        skipped = [] # two separate lists, one for removed and one for skipped
+
+        for player in players:
+            if remove_next:
+                removed.append(player)
+            else:
+                skipped.append(player)
+            remove_next = not remove_next
+
+        players = skipped
+        # players updated to be skipped, which is the new list of players after removing every second player
+    return removed
+    """
+    """model solution #2
+    def find_order(n):
+    players = list(range(1, n+1))
+
+    removed = []
+    remove_next = False
+
+    for player in players:
+        if remove_next:
+            removed.append(player)
+        else:
+            players.append(player) # adding surviors to the end of the list
+        remove_next = not remove_next
+    # no need to update players, because we are iterating through the original list of players
+    # only works because we are iterating through the original list of players, and not modifying it during iteration
+    return removed
+    """    
     
 
 if __name__ == "__main__":

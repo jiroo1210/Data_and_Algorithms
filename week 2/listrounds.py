@@ -12,7 +12,7 @@ def find_rounds(numbers:list):
         idx = numbers.index(n)
         temp.append(numbers.pop(idx)) # len(numbers) 1 shorter 
         n += 1
-        # numbers[idx] = numbers[idx+1] befor pop
+        # numbers[idx] = numbers[idx+1] before pop
         while idx < len(numbers):
             if numbers[idx] == temp[-1] + 1:
                 temp.append(numbers.pop(idx)) # pop used. dont increase idx
@@ -22,6 +22,25 @@ def find_rounds(numbers:list):
         ordered.append(temp)
 
     return ordered
+
+""" model solution
+def find_rounds(numbers):
+    n = len(numbers)
+
+    result = []
+    current = 1
+
+    while current <= n:
+        round = []
+        for number in numbers:
+            if number == current:
+                round.append(number)
+                current += 1
+        result.append(round)
+
+    return result
+
+"""
 
     
 if __name__ == "__main__":
