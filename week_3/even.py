@@ -8,12 +8,27 @@ def count_sublists(numbers:list):
     x = 0 # length of new sublists
     for i in range(len(numbers)):
         if numbers[i] % 2 == 0:
-            x += 1
-            n += x # x is increased
+            x += 1 # length increased by 1,
+            n += x # so number of sublists increased by x(prev) + 1
         else:
-            x = 0
+            x = 0 # odd number resets the length of new sublists
     
     return  n
+    """ model solution
+    def count_sublists(numbers):
+    total = 0
+    count = 0
+
+    for number in numbers: # better to iterate through the numbers directly, rather than using an index
+        if number % 2 == 0:
+            count += 1
+        else:
+            count = 0
+        total += count # outside of the if statement goes through total += 0 for else, 
+                        # which is correct, but not necessary.
+
+    return total
+    """    
 
 
 

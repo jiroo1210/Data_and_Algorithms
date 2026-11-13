@@ -1,20 +1,35 @@
 def find_profits(prices:list):
     # TODO retrun list of profits
     profit = []
-    n = len(prices)
-    best = 0
-    min_price = prices[0]
-    for i in range(n):
-        if min_price>=prices[i]:
+    
+    if prices:
+        min_price = prices[0]
+    else:
+        return profit
+    # best practice
+    # min_price = float('inf')
+    for price in prices:
+        if min_price>= price:
             profit.append(0)
-            min_price = prices[i]
+            min_price = price
         else:
-            best = prices[i] - min_price
+            best = price - min_price
             profit.append(best)
 
     return profit
     
+""" model solution
+def find_profits(prices):
+    profits = []
+    min_price = prices[0]
 
+    for price in prices:
+        min_price = min(min_price, price) # >= tiny faster
+        profits.append(price - min_price)
+
+    return profits
+
+"""
 if __name__ == "__main__":
     print(find_profits([1, 2, 3, 4])) # [0, 1, 2, 3]
     print(find_profits([4, 3, 2, 1])) # [0, 0, 0, 0]

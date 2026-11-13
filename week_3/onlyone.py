@@ -1,18 +1,29 @@
 def find_number(numbers:list):
     # TODO find the unique num
-    first = numbers[0]
-
+    if not numbers:
+        return []
+    
+    prev_num = numbers[0]
     for i in range(1, len(numbers)):    
-        if first == numbers[i]:
-            first = numbers[i]
+        if prev_num == numbers[i]:
+            prev_num = numbers[i]
         else:
-            if i -1 > -1:
-                if first == numbers[i-2]:
-                    return numbers[i]
-                else:
-                    return numbers[i-1]
+            if prev_num == numbers[i-2]:
+                return numbers[i]
+            else:
+                return numbers[i-1]
+    
+""" model solution
+def find_number(numbers):
+    min_number = min(numbers)
+    max_number = max(numbers)
 
+    if numbers.count(min_number) == 1: # .count() is O(n) 
+        return min_number
+    else:
+        return max_number
 
+"""
         
         
 

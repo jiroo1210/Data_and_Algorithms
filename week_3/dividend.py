@@ -15,13 +15,25 @@ def find_profits(prices:list):
     for i,price in enumerate(prices):
         cur_val = price + i
         # lowest "price" 
-        if cur_val < min_val:
+        if cur_val < min_val: # faster than min( cur_val, min_val)
             min_val = cur_val
         # 0 when same prices, but dividend collects
         profit.append(cur_val - min_val)
 
 
     return profit
+
+""" model solution 
+def find_profits(prices):
+    profits = []
+    min_price = prices[0]
+
+    for pos, price in enumerate(prices):
+        min_price = min(min_price, price + pos) # slower than if a < b : b = a
+        profits.append(price + pos - min_price)
+
+    return profits
+"""
 
 if __name__ == "__main__":
     print(find_profits([1, 2, 3, 4])) # [0, 2, 4, 6]
