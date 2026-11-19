@@ -3,11 +3,12 @@ def find_profits(prices:list):
     profit = []
     # need to take account of minimum value not min_price
     min_price = float('inf')
+    # dividend = date_sell - date_buy
     # best = prices[i] - min_price + (date_sell - date_buy)
     # = (prices[i] + date_sell) - (min_price + date_buy)
-    # = (prices[i] + {i})- (min_price + date_buy)
+    # = (prices[i] + {i})- (min_price + {index of min_price})
     # = cur_val - min_val
-    # keep track of prices[i] + i ; 
+    # both cur_val and min_val now contains position of the prices. 
     min_val = min_price
 
     # option 1: i in range len ....
@@ -17,8 +18,9 @@ def find_profits(prices:list):
         # lowest "price" 
         if cur_val < min_val: # faster than min( cur_val, min_val)
             min_val = cur_val
-        # 0 when same prices, but dividend collects
+        # profit is 0 when same prices, but dividend collects
         profit.append(cur_val - min_val)
+        
 
 
     return profit

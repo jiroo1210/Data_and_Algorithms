@@ -12,7 +12,7 @@ def count_sublists(numbers:list):
             n += x # so number of sublists increased by x(prev) + 1
         else:
             x = 0 # odd number resets the length of new sublists
-    
+        # n += x can be outside of the if statement, but it is more efficient to only add when x > 0
     return  n
     """ model solution
     def count_sublists(numbers):

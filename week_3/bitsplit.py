@@ -21,10 +21,10 @@ def count_splits(sequence:str):
             o_streak += 1
         if z_streak == o_streak:
             matched += 1 
-            # if i == len(sequence)-1: matched -=1
-            # this will remove the -1 at the return statement
-            # but one more step in each iteration is not needed, 
-            # so we can just subtract 1 at the end
+        # if i == len(sequence)-1: matched -=1
+        # this will remove the -1 at the return statement
+        # but one more step in each iteration is not needed, 
+        # so we can just subtract 1 at the end
     # matched - 1 because we cannot "split" at the end of the sequence, 
     # but z_streak == o_streak at the end of the sequence, 
     # so we need to subtract 1 from the count of matched

@@ -24,7 +24,7 @@ def multiply_str(match):
     if num_1 > 0 and num_2 >0:
         return str(num_1*num_2)
     else:
-        return match.group()
+        return match
 # first halves are same. can be merged.
 def sum_str(match):
     num_1 = int(match.group(1)) # index start from 1; 1st matched group
@@ -32,7 +32,7 @@ def sum_str(match):
     if num_1 > 0 and num_2 >0:
         return str(num_1 + num_2)
     else:
-        return match.group()
+        return match
 
 """ model solution #1
 import re
