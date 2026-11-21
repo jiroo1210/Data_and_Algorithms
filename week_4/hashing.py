@@ -13,7 +13,34 @@ def hash_value(input:str):
         hash_val += alp_dict[s]*23**(n-1-i)
     return hash_val % (2**32)
 
+""" model solution
+A = 23
+M = 2**32
 
+def hash_value(string):
+    n = len(string)
+
+    result = 0
+    for i in range(n):
+        code = ord(string[i]) - ord("a") # ord() returns the ascii value of a character
+        result += code * A ** (n - i - 1)   # this maps alphabet from 0-25 
+
+    return result % M
+"""
+
+""" Honer's method
+A = 23
+M = 2**32
+def hash_value(input: str) -> int:
+    result = 0
+    for char in input:
+        result = (result*A + ord(char)- ord("a")) % M
+    return result
+
+# odr("a") is taken off because 'a' is assigned value of 0
+# each iteration multiplies the previous result by A
+# so that first character get A to the power of N-1, second gets N-2 .. and so on
+"""
 
 if __name__ == "__main__":
     print(hash_value("abc")) # 25
