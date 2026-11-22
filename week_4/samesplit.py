@@ -19,12 +19,13 @@ def count_splits(numbers:list)->int:
             left_end = i + 1
             break
 
-    back_numbers = numbers[::-1]
+    back_numbers = numbers[::-1] # iterate backward in place using range(n - 1, -1, -1) 
+                                 # rather than copying list
     for i in range(n):
         rhs.add(back_numbers[i])
         if len(rhs) == unique:
             right_end = n - (i + 1)
-            break
+            break # can return here
 
     count = right_end - left_end + 1
     # count > -1 
