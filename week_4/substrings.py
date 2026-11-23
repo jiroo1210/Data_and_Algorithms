@@ -9,8 +9,8 @@ def count_substrings(data:str):
 
     return len(final_set) 
 
-""" model solution was similar to my soultion.
-    Instead, AI suggested solution
+""" # model solution was similar to my soultion.
+    # Instead, AI suggested solution
 
 from itertools import pairwise
 
