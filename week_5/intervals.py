@@ -3,28 +3,46 @@ import random
 def count_nested(intervals:list) -> int:
     # TODO takes a list of intervals as a parameter and returns the number of nested intervals
     # plan: sort the list using some tuple key
-    if not intervals:
-        return 0
-    if len(intervals) == 1:
-        return 0
+    
     nested_intervals = 0
     sorted_intervals = sorted(intervals, key =lambda x: (x[0], -x[1]))
     # ascending start, descending end
-    # then for all interval[i][0] <= interval[i+1][0] 
-    # and only need to check if interval[i+1][1] <= interval[i][1]
-    # need to choose big end, but i=0, end = sorted_intervals[0][1] takes extra count
-    # make the iteration go else: that end is sorted_intervals[0][1] for i = 1
-    # choose -inf for upperbound
+    # so that
+    # sorted_interval[i][0] <= sorted_interval[i+1][0] 
+    # sorted_interval[i][1] <= sorted_interval[i+1][1]
+
+    # using the fact that smaller negative number has larger absolute value
+    # if the new interval's end is smaller than the previous end, it's nested
+    # choose 0 for upperbound
     
-    end = float('-inf')
+    end = float('-inf') # initialization for the end
+
     for interval in sorted_intervals:
         if interval[1] <= end: # new interval upperbound <= end
             nested_intervals += 1
-        else: # end is not nested
+        else: # initial run will always take this branch
+              # also empty or single element list will take this route
             end = interval[1]
 
-
     return nested_intervals
+
+    """ # model solution
+    def count_nested(intervals):
+    def sort_key(interval):
+        return (interval[0], -interval[1])
+
+    intervals = sorted(intervals, key=sort_key)
+
+    count = 0
+    max_right = 0 # might fail if all intervals are negative
+
+    for left, right in intervals:
+        if right <= max_right:
+            count += 1
+        max_right = max(max_right, right)
+
+    return count
+    """
 if __name__ == "__main__":
     print(count_nested([])) # 0
     print(count_nested([(1, 2)])) # 0

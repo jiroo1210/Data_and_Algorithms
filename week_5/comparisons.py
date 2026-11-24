@@ -27,6 +27,9 @@ def find_list(comparer:Comparer) ->list:
     # shallow copy(.copy()) nor deepcopy workeds
     # so hard code for len 0,1?
 
+    # better approach
+    # if n <= 1: return list(range(1,n+1))
+
 
     # only way to do this is done with a,b both indexes
     # comparer.smaller(a,b) -> True/False
@@ -55,10 +58,10 @@ def find_list(comparer:Comparer) ->list:
         return indices_merge(left_sorted,right_sorted)
     
     # merge the list of single index after comparison
-    def indices_merge(left,right):
+    def indices_merge(left,right): # from merge sort example
         merged = []
         i = j  = 0
-        # left and right will build from len 1 to len n//2 each
+        # add lesser index to left and bigger index to right
         while i < len(left) and j < len(right):
             if comparer.smaller(left[i],right[j]):
                 merged.append(left[i])
@@ -66,27 +69,55 @@ def find_list(comparer:Comparer) ->list:
             else:
                 merged.append(right[j])
                 j += 1
-        # if len(l or r) % 2 != 0, one element will be left on last iteration
+        # one side is exhausted; the other's remaining items are sorted and
+        # larger than everything in merged, so append them with no more comparisons
         merged.extend(left[i:])
         merged.extend(right[j:])
-
+        # checking left or right has last element is not worth the effort
         return merged # now each index has "order" of smallest to largest
 
     # initial input "identity matrix"
     identity_indices = [x for x in range(n)] 
 
-    # the answer key to smallest to largest
+    # map the "order" of the indices
     sorted_indices = indices_sort(identity_indices)
 
     # return a new list, [1 to n] as in sorted indices
-    answer = [1]*n # index starts at 0, so need to add 1 to all
-    # order of smallest to largest
-    # index of comparer.numbers
+    answer = [1]*n # index starts at 0, so need to add 1 to all of them
     for order, index in enumerate(sorted_indices): 
         answer[index] += order
     
     return answer
 
+    """ # model solution
+    def merge_sort(numbers, comparer):
+    if len(numbers) == 1:
+        return numbers
+
+    middle = len(numbers) // 2
+    left = merge_sort(numbers[:middle], comparer)
+    right = merge_sort(numbers[middle:], comparer)
+
+    result = []
+    while left or right:
+        if not right or (left and comparer.smaller(left[0], right[0])):
+            result.append(left[0])
+            left.pop(0)
+        else:
+            result.append(right[0])
+            right.pop(0)
+    # pop is slow. dont use it
+    return result
+    # end of def merge_sort
+
+    def find_list(comparer):
+        n = comparer.list_size()
+        places = merge_sort(list(range(n)), comparer)
+        result = [0] * n
+        for i in range(n):
+            result[places[i]] = i + 1
+    return result
+    """
 
     
 
