@@ -7,18 +7,28 @@ def check_overlapping(reservations:list) -> bool:
     if len(reservations) < 2:
         return False
     sorted_list = sorted(reservations)
-    start = sorted_list[0][0]
-    end = sorted_list[0][1]
-    for i in range(1,len(reservations)):
-        if sorted_list[i][0] <= end:
-            if start <= sorted_list[i][0]:
-                return True
+    start = sorted_list[0][0] 
+    end = sorted_list[0][1] 
+    for i in range(1,len(reservations)): 
+        if sorted_list[i][0] <= end: # no need to check start <= sorted_list[i][0]
+            return True
         start = sorted_list[i][0]
         end = sorted_list[i][1]
         
     return False
      
-   
+""" # model solution
+def check_overlapping(reservations):
+    reservations = sorted(reservations)
+    prev_end = -1 # don't bother the first start date
+    for start, end in reservations:
+        if prev_end >= start:
+            return True
+        prev_end = end
+
+    return False
+
+"""
 if __name__ == "__main__":
     print(check_overlapping([])) # False
     print(check_overlapping([(1, 3)])) # False

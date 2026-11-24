@@ -13,6 +13,24 @@ def count_steps(numbers:list)->int:
     
     return step
 
+""" # model solution
+
+def count_steps(numbers):
+    pairs = [] # using tuple to store number and index
+    for pos, number in enumerate(numbers):
+        pairs.append((number, pos))
+    pairs.sort() # sort by (number, position) and no need to look up dict
+
+    robo_pos = 0
+    total_steps = 0
+    for number, pos in pairs:
+        total_steps += abs(robo_pos - pos) # how far is the next number?
+        # if robo_pos < pos, value is negative, thus abs()
+        robo_pos = pos
+
+    return total_steps
+"""
+
 if __name__ == "__main__":
     print(count_steps([1])) # 0
     print(count_steps([1, 2, 3])) # 2

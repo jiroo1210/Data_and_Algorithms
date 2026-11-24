@@ -34,7 +34,28 @@ def create_string(pages:list)->str:
             
     return page_string.strip(',')
 
+""" # model solution more elegant approach
 
+def create_string(pages):
+    pages = sorted(pages)
+    ranges = []
+
+    def string_helper(pre,suf):
+        if pre==suf:
+            return str(pre)
+        else:
+            return str(pre) + '-' + str(suf)
+    pre = suf = pages[0]
+
+    for page in pages:
+        if page <= pre + 1: # need to consider same element repeated
+            suf = page # extend
+        else:
+            ranges.append(string_helper(pre, suf))
+            pre = suf = page # reset
+
+    return ','.join(ranges)
+    """
 
         
 
