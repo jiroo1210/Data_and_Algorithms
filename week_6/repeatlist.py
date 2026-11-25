@@ -17,6 +17,23 @@ class RepeatList:
         # TODO retrun if any of them are repeated
         return self.repeated
 
+
+    """ # model solution
+    class RepeatList:
+        def __init__(self):
+            self.numbers = set()
+            self.repeat_status = False
+
+        def append(self, number):
+            if number in self.numbers:
+                self.repeat_status = True
+            else:
+                self.numbers.add(number)
+
+        def repeat(self):
+            return self.repeat_status
+    """
+
 if __name__ == "__main__":
     numbers = RepeatList()
 

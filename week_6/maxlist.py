@@ -2,7 +2,7 @@ class MaxList: # use mode example
     def __init__(self):
         # TODO maintain list of numbers
         self.list = []
-        self.max_num = 0
+        self.max_num = float('-inf')
 
     def append(self, number):
         # TODO add number to the list

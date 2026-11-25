@@ -8,17 +8,19 @@ class ChangeList:
     def append(self, number):
         # TODO add number to the end of the list
         n = len(self.list) # index upto n-1
-        self.list.append(number) # index n filled
-        self.changes.append(-self.delta) # no changes so far
+        self.list.append(number - self.delta)
+  
 
     def get(self, index):
         # TODO access a number on the list
-        return self.list[index] + self.changes[index] + self.delta
+        return self.list[index] + self.delta
 
     def change_all(self, amount):
         # TODO increment all list numbers by amount
         self.delta += amount
 
+""" # model solution is same as modified code above
+"""
 
 if __name__ == "__main__":
     numbers = ChangeList()
