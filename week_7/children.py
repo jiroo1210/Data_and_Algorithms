@@ -23,7 +23,31 @@ def count_children(node):
             family_tree.append(0)
         
     return sorted(family_tree)
-    
+
+""" # model solution
+def count_children(node):
+    counts = []
+    count_children_helper(node, counts) 
+    # recursion happens within helper function
+    return sorted(counts)
+
+def count_children_helper(node, counts):
+    counts.append(len(node.children))
+    for child in node.children:
+        count_children_helper(child, counts)
+"""
+
+""" # Alternative solution from Gemini
+    # on how to avoid nested list.
+    # yield from will flatten the list while keeping "return"
+
+def count_children(node):
+    counts = [len(node.children)] 
+    # 1. Count current node's children
+    counts.extend(sum([count_children(child) for child in node.children], [])) 
+    # 2. Recursively get children counts from all children
+    return sorted(counts)
+"""
 
 if __name__ == "__main__":
     tree1 = Node(1, [Node(4, [Node(3), Node(7)]),

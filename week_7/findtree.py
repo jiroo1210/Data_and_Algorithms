@@ -10,13 +10,56 @@ class Node:
             return f"Node({self.value}, {self.children})"
 
 def find_tree(grid:list)-> Node: 
-    # TODO tructure of the depicted tree using the class Node
+    # TODO structure of the depicted tree using the class Node
+    # 1. read the file: do not replace dot. approach as grid[row][colum]
+    # 2. need recursion in format of 
+    #   Node(parent, children)
+
+    width = len(grid[0]) # col_num
+    height = len(grid) # row_num
+
+    for y in range(height):
+        for x in range(width):
+            if grid[y][x] !=".": # less strain than .isdigit()    
+                return tree_helper(grid,y,x)
+
+
+def tree_helper(grid, y, x) ->Node:
+    parent = int(grid[y][x]) # need to be int
+    children = []
+    width = len(grid[0]) # col_num
+    height = len(grid) # row_num
+    # position of / | \ are set, regardless of they exist or not
+    # "/" r+1 c-1 ; "|" r+1 c ; "\\" r+1 c+1
+    # A: r+2 c-2 ; B r+2 c ; C r+2 c+2
+    # A B C child position goes down same direction as legs
+    # can reuse same increment change in y & x
+    # make direction as list
+    directions = [(1,-1,"/"),(1,0,"|"),(1,1,"\\")] # need to escape \ 
+
+    for dy, dx, leg in directions:
+        child_y, child_x = y + dy, x + dx
+        if child_y < height and 0 <= child_x < width:
+            # within the index box
+            if grid[child_y][child_x] == leg:
+                # when you see a leg
+                while grid[child_y][child_x] == leg:
+                    child_y += dy
+                    child_x += dx
+                children.append(tree_helper(grid, child_y, child_x))
+                    # runs down from child to child left most then right most
+                    
+    return Node(parent,children)
+""" # old solution
+
+def find_tree(grid:list)-> Node: 
+    # TODO structure of the depicted tree using the class Node
     # 1. read the file: do not replace dot. approach as grid[row][colum]
     # 2. need recursion in format of 
     #   Node(parent, children)
 
     # need row, column to be independent of index
-    # choose -1; make sure row and col are positive int
+    # choose -1 for starting point
     r_row, r_col = -1, -1
     # finding root
     # .replace() .strip() did not help
@@ -64,7 +107,7 @@ def tree_helper(grid, r_row, r_column) ->Node:
             column -= 1
     
     # "|" straight down
-    if (r_row + 1 < len(grid)) and (0<=r_column< len(grid[0])) and (grid[r_row + 1][r_column] == r"|"):
+    if (r_row + 1 < len(grid)) and (0<=r_column< len(grid[0])) and (grid[r_row + 1][r_column] == "|"):
         row, column = r_row +1, r_column
         while row +1 <len(grid):
             if grid[row+1][column].isdigit():
@@ -91,7 +134,7 @@ def tree_helper(grid, r_row, r_column) ->Node:
 
     return Node(parent, children)
 
-
+"""
 
 if __name__ == "__main__":
     grid = [r"...........",

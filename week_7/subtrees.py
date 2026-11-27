@@ -8,7 +8,7 @@ class Node:
             return f"Node({self.value})"
         else:
             return f"Node({self.value}, {self.children})"
-
+# based on children.py model solution
 def count_subtrees(node):
     # TODO list of subtree sizes (not a set)
     subtrees = []
@@ -26,10 +26,12 @@ def subtrees_helper(node, subtrees):
         # stacking count recursively
     subtrees.append(count)
     # add current node's count to subtrees
-    # only because the task asks for all node's subtrees count
-    # seems redundant idk
-    
+        
     return count #for recursion 
+
+""" # model solution too similar
+
+"""
 
 if __name__ == "__main__":
 

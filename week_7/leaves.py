@@ -22,6 +22,17 @@ def count_leaves(node:Node) -> int:
             no_leaves += count_leaves(child)
     return no_leaves
 
+""" # model solution
+
+def count_leaves(node):
+    result = 1 if not node.children else 0
+    # return early is faster, but the logic is more complex
+    for child in node.children: # called for no children case as well
+        result += count_leaves(child)
+    return result
+
+"""
+
 if __name__ == "__main__":
     tree1 = Node(1, [Node(4, [Node(3), Node(7)]),
                      Node(5),

@@ -16,12 +16,12 @@ def find_path(node:Node, a:int, b:int)-> list:
     # 2. find a_route and b_route
     # 3. return a_route portion reversed + b_route
     # a_route[i-1:] include last shared parent
-    # a_route[i:][::-1] take reverse 
+    # b_route[i:][::-1] take reverse 
 
     # work as from this list a_route, take this slicing [i:]
-    # then of that list, a_route[i:], take this slicing [::-1] 
+    # then of that list, b_route[i:], take this slicing [::-1] 
     # reverse
-
+    if not node or not a or not b: return None
     path_a = []
     path_b = []
     a_route = path_helper(node,a,path_a)
@@ -37,12 +37,14 @@ def find_path(node:Node, a:int, b:int)-> list:
     while i <len(a_route) and i<len(b_route):
         if a_route[i] != b_route[i]:
             break # at ith index their parents are different
+            # can be included in while conditions
+            # ... and a_route[i] == b_route[i]:...
         i += 1
     # share ancestors upto (i-1) index
     # paths now ready to recycled
-    path_a = a_route[i-1:][::-1] 
-    # portion out from common parent to a
-    # then 'reverse', only include a_route
+    # we want a_route[i-1:], but reversed: from common parent to a
+    path_a = [a_route[idx] for idx in range(len(a_route)-1, i-2, -1)]
+    # a_route[i-1:][::-1] = [a_rounte[idx] for idx in range(len(a_route)-1, i-2, -1)]
 
     path_b = b_route[i:] # b 
 
@@ -52,7 +54,8 @@ def find_path(node:Node, a:int, b:int)-> list:
     # need to pass through empty list as start
     # passing [] did not work.
     # do something with None and initial set value
-def path_helper(node,target,path:None):
+def path_helper(node,target,path=None):
+    # from ancestors model solution, ancestor_helper()
     if path is None: path = [] # initial set up
     # also when recursion had dead end in one of branches
 
